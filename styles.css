@@ -1,0 +1,133 @@
+body {
+  font-family: 'Times New Roman', serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+header {
+  background-color: #fff;
+  color: #333;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.container {
+  font-family: 'Times New Roman', serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #84afff;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+#filters {
+  margin-bottom: 20px;
+}
+
+label {
+  font-size: 18px;
+}
+
+/* Style for dropdown menu */
+select {
+  font-family: 'Times New Roman', serif;
+  width: 50%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  appearance: none; /* Remove default appearance */
+  background-color: #fff;
+  color: #333;
+  font-size: 16px;
+}
+
+/* Style for dropdown arrow */
+select:after {
+  content: '\25BC'; /* Unicode character for down arrow */
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none; /* Prevent clicking on the arrow */
+}
+
+/* Style for dropdown options */
+option {
+  background-color: #fff;
+  color: #333;
+}
+
+/* Style for dropdown when focused */
+select:focus {
+  font-family: 'Times New Roman', serif;
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+button {
+  font-family: 'Times New Roman', serif;
+  padding: 10px 20px;
+  background-color: #22242e;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #000000;
+}
+
+.movie-card {
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 1);
+  background-color: #fff;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #333;
+}
+
+.loading {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #ccc;
+  border-top-color: #007bff;
+  border-radius: 50%;
+  margin: 0 auto;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+footer {
+  background-color: #fff;
+  color: #333;
+  padding: 10px 0;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+
+.waiting_movie-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

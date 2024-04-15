@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Movie Name Generator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Random Movie Name Generator</h1>
+  </header>
+
+  <div class="container">
+    <div id="filters">
+      <label for="language-select">Select Language:</label>
+      <select id="language-select">
+        <option value="ta" selected>Tamil</option> <!-- Default selection set to Tamil -->
+      </select>
+      
+      <button onclick="fetchRandomMovie()">Get Random Movie</button>
+    </div>
+
+    <div id="movie-info" class="movie-card">
+      <!-- Movie information will be displayed here -->
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 Random Movie Name Generator</p>
+  </footer>
+
+  <script>
+    const apiKey = 'YOUR_TMDB_API_KEY';
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4OTRkMDlhY2JhZmMxYzE4YTE1YjI5ZWZmYTdjNzY0OCIsInN1YiI6IjY2MWNjODhmNGNhNjc2MDE4NzFjNjczZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1FabUX4AjHhIiRG-krZIKQnvSL1regh3wfPj-gGjoyc'
+      }
+    };
+
+    // Function to fetch all available languages from TMDb API
+    function fetchLanguages() {
+      fetch(`https://api.themoviedb.org/3/configuration/languages?api_key=${apiKey}`, options)
+        .then(response => response.json())
+        .then(data => {
+          const languageSelect = document.getElementById('language-select');
+          data.forEach(language => {
+            const option = document.createElement('option');
+            option.value = language.iso_639_1;
+            option.textContent = language.english_name;
+            languageSelect.appendChild(option);
+          });
+        })
+        .catch(err => console.error(err));
+    }
+
+    // Function to get a random integer between min and max (inclusive)
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    // Function to fetch a random movie
+    function fetchRandomMovie() {
+      const languageSelect = document.getElementById('language-select');
+      const language = languageSelect.value;
+      const randomPage = getRandomInt(1, 500); // Assuming there are 500 pages of popular movies
+      // Calculate current date
+      const currentDate = new Date();
+      const year = currentDate.getFullYear();
+      const month = ('0' + (currentDate.getMonth() + 1)).slice(-2); // Add leading zero if needed
+      const day = ('0' + currentDate.getDate()).slice(-2); // Add leading zero if needed
+      const formattedDate = `${year}-${month}-${day}`;
+      // Show loading indicator
+      document.getElementById('movie-info').innerHTML = 
+      '<div class="loading"></div>';
+      // '<div id="movie-info" class="movie-card>  <img src="movie_loading.gif" alt="Loading..."></div>'
+
+      // const url = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=${language}&page=${randomPage}&sort_by=popularity.desc&api_key=${apiKey}&with_original_language=${language}&vote_average.gte=6&release_date.lte=${formattedDate}`;
+      const url = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${randomPage}&sort_by=popularity.desc&api_key=${apiKey}&with_original_language=${language}&popularity.gte=6`;
+
+      fetch(url, options)
+        .then(response => response.json())
+        .then(data => {
+          if (data.results && data.results.length > 0) {
+            let randomMovie;
+            do {
+              const randomIndex = getRandomInt(0, data.results.length - 1);
+              randomMovie = data.results[randomIndex];
+            } while (!randomMovie.poster_path);
+            
+            displayMovie(randomMovie);
+          } else {
+            // Retry fetching a random movie
+            fetchRandomMovie();
+          }
+        })
+        .catch(err => console.error(err));
+    }
+
+    // Function to display movie information
+    function displayMovie(movie) {
+      const movieInfo = document.getElementById('movie-info');
+
+      // Clear loading indicator
+      movieInfo.innerHTML = '';
+
+      const titleLink = document.createElement('a');
+      titleLink.href = `https://www.themoviedb.org/movie/${movie.id}`;
+      titleLink.textContent = `${movie.title} (${movie.original_title})`;
+      titleLink.target = "_blank"; // Open link in a new tab
+      const titleElement = document.createElement('h2');
+      titleElement.appendChild(titleLink);
+
+      movieInfo.appendChild(titleElement);
+
+
+      // Check if the poster path exists
+      if (movie.poster_path) {
+        const posterElement = document.createElement('img');
+        posterElement.src = `https://image.tmdb.org/t/p/w300${movie.poster_path}`; // Change poster size to w300
+        posterElement.alt = `${movie.title} Poster`;
+        posterElement.style.display = 'block'; // Ensure the image is block-level for center alignment
+        posterElement.style.margin = '0 auto'; // Set margin to auto for horizontal center alignment
+        movieInfo.appendChild(posterElement);
+      }
+    }
+
+    // Fetch available languages when the page loads
+    window.onload = function() {
+      fetchLanguages();
+    };
+  </script>
+</body>
+</html>
