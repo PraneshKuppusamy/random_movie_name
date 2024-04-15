@@ -24,14 +24,16 @@ header {
   background-color: #84afff;
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  font-size: 12px;
 }
 
 #filters {
+  font-size: 12px;
   margin-bottom: 20px;
 }
 
 label {
-  font-size: 18px;
+  font-size: 12px;
 }
 
 /* Style for dropdown menu */
@@ -142,4 +144,61 @@ footer {
   height: auto; /* Maintain aspect ratio */
   display: block;
   margin: 10px auto; /* Center the image horizontally */
+}
+
+/* Adjust styling for the input fields */
+input[type="number"] {
+  width: 80px;
+  padding: 5px;
+  margin: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* CSS for the popup modal */
+.popup {
+  font-family: 'Times New Roman', serif;
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  z-index: 1000;
+}
+
+.popup button {
+  font-family: 'Times New Roman', serif;
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.popup button:hover {
+  background-color: #0056b3;
+}
+
+
+/* CSS for the timer overlay */
+.timer-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1; /* Ensure the overlay is on top of the poster */
+}
+
+.timer-text {
+  font-size: 36px; /* Adjust font size as needed */
+  color: #fff;
 }

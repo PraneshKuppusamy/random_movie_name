@@ -8,18 +8,20 @@
 </head>
 <body>
   <header>
-    <h1>Random Movie Name Generator</h1>
+    <h1>Random Movie Name Generator For Dumb Charades</h1>
+    <br>
+    <h2>How To Play:<br><br> Act and make your team guess the generated movie, without speaking.</h2>
   </header>
 
   <div class="container">
-    <div id="filters">
+    <div id="filters" >
       <label for="language-select">Select Language:</label>
       <select id="language-select">
         <option value="ta" selected>Tamil</option> <!-- Default selection set to Tamil -->
       </select>
       <br>
       <br>
-      <button onclick="fetchRandomMovie()">Get a Random Movie</button>
+      <div style="text-align: center"><button onclick="fetchRandomMovie()">Get a Random Movie</button></div>
     </div>
 
     <div id="movie-info" class="movie-card">
@@ -101,7 +103,7 @@
         })
         .catch(err => console.error(err));
     }
-
+         
     // Function to display movie information
     function displayMovie(movie) {
       const movieInfo = document.getElementById('movie-info');
