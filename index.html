@@ -17,7 +17,8 @@
       <select id="language-select">
         <option value="ta" selected>Tamil</option> <!-- Default selection set to Tamil -->
       </select>
-      
+      <br>
+      <br>
       <button onclick="fetchRandomMovie()">Get a Random Movie</button>
     </div>
 
@@ -26,9 +27,9 @@
     </div>
   </div>
 
-  <footer>
+  <!-- <footer>
     <p>&copy; 2024 Random Movie Name Generator</p>
-  </footer>
+  </footer> -->
 
   <script>
     const apiKey = 'YOUR_TMDB_API_KEY';
@@ -45,6 +46,8 @@
       fetch(`https://api.themoviedb.org/3/configuration/languages?api_key=${apiKey}`, options)
         .then(response => response.json())
         .then(data => {
+          // Sort languages alphabetically
+          data.sort((a, b) => a.english_name.localeCompare(b.english_name));
           const languageSelect = document.getElementById('language-select');
           data.forEach(language => {
             const option = document.createElement('option');
@@ -78,7 +81,7 @@
       // '<div id="movie-info" class="movie-card>  <img src="movie_loading.gif" alt="Loading..."></div>'
 
       // const url = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=${language}&page=${randomPage}&sort_by=popularity.desc&api_key=${apiKey}&with_original_language=${language}&vote_average.gte=6&release_date.lte=${formattedDate}`;
-      const url = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${randomPage}&sort_by=popularity.desc&api_key=${apiKey}&with_original_language=${language}&popularity.gte=6`;
+      const url = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${randomPage}&sort_by=popularity.desc&api_key=${apiKey}&with_original_language=${language}&popularity.gte=7`;
 
       fetch(url, options)
         .then(response => response.json())
@@ -121,6 +124,7 @@
         const posterElement = document.createElement('img');
         posterElement.src = `https://image.tmdb.org/t/p/w300${movie.poster_path}`; // Change poster size to w300
         posterElement.alt = `${movie.title} Poster`;
+        posterElement.classList.add('poster'); // Add the poster class
         posterElement.style.display = 'block'; // Ensure the image is block-level for center alignment
         posterElement.style.margin = '0 auto'; // Set margin to auto for horizontal center alignment
         movieInfo.appendChild(posterElement);

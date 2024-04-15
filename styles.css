@@ -4,6 +4,7 @@ body {
   padding: 0;
   background-color: #f8f9fa;
   color: #333;
+  font-size: 12px;
 }
 
 header {
@@ -11,11 +12,13 @@ header {
   color: #333;
   padding: 20px 0;
   text-align: center;
+  font-size: 14px;
 }
 
 .container {
   font-family: 'Times New Roman', serif;
-  max-width: 800px;
+  /* max-width: 500px; */
+  max-width: auto;
   margin: 0 auto;
   padding: 20px;
   background-color: #84afff;
@@ -41,7 +44,7 @@ select {
   appearance: none; /* Remove default appearance */
   background-color: #fff;
   color: #333;
-  font-size: 16px;
+  font-size: 12px;
 }
 
 /* Style for dropdown arrow */
@@ -52,6 +55,7 @@ select:after {
   right: 10px;
   transform: translateY(-50%);
   pointer-events: none; /* Prevent clicking on the arrow */
+  font-size: 12px;
 }
 
 /* Style for dropdown options */
@@ -66,6 +70,7 @@ select:focus {
   outline: none;
   border-color: #007bff;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  font-size: 12px;
 }
 
 button {
@@ -76,7 +81,7 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 12px;
   transition: background-color 0.3s ease;
 }
 
@@ -92,7 +97,7 @@ button:hover {
 }
 
 h2 {
-  font-size: 24px;
+  font-size: 12px;
   margin-bottom: 10px;
   text-align: center;
   color: #333;
@@ -106,8 +111,7 @@ h2 {
   border-radius: 50%;
   margin: 0 auto;
   animation: spin 1s linear infinite;
-}
-
+} 
 @keyframes spin {
   to {
     transform: rotate(360deg);
@@ -130,4 +134,12 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.poster {
+  /* max-width: 200px; Adjust maximum width as needed */
+  max-width: auto;
+  height: auto; /* Maintain aspect ratio */
+  display: block;
+  margin: 10px auto; /* Center the image horizontally */
 }
